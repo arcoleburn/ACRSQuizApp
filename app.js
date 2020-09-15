@@ -20,7 +20,7 @@ const questions = {
       answers: ["Timon", "Troilus", "Juliet", "King John"],
       correctAnswer: "King John (437)",
     },
-  ],
+  ],g
   quizStarted: false,
   questionNumber: 0,
   score: 0,

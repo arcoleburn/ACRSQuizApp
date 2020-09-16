@@ -1,15 +1,11 @@
 {
 	"folders": [
 		{
-			"path": "../JQuery Exercises/return-of-fizz-buzz"
+			"name": "jquery-shopping-list-walkthrough-v2-13",
+			"path": "../JQuery Exercises/jquery-shopping-list-walkthrough-v2-13"
 		},
 		{
-			"path": "../JQuery Exercises/cat-carousel"
-		},
-		{
-			"path": "../shopping-list-master"
-		},
-		{
+			"name": "quizz",
 			"path": "."
 		}
 	],

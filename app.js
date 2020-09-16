@@ -87,7 +87,7 @@ const store = {
 
 
 function getQuestion() {
-  //this function takes the store and gives the quest value for adding to the template
+  //this function takes the store and gives the question value for adding to the template
     let num = store.questionNumber;
     let nextQuestion = store.questions[num].question;
     console.log(nextQuestion);
@@ -185,13 +185,14 @@ function conclusionGenerator() {
   //output window with final score, button to retake quiz
   let score = store.score;
   let totalQuestions = store.questions.length;
-  $("body").html(`<section class="boxit" id="answer-screen">
+  const template = (`<section class="boxit" id="answer-screen">
         <h2>Congrats!</h2>
         <p>You got ${score} of ${totalQuestions} correct</p>
         <p> Click the button below to try again.</p>
         <button> Once More unto the Breach!</button>
 
     </section>`);
+    renderIt(template);
 }
 
 
@@ -203,30 +204,38 @@ function conclusionGenerator() {
 
 function main() {
   //welcomeScreenGenerator(); 
-  //conclusionGenerator();
+  renderIt();
+  conclusionGenerator();
   //questionTemplateGenerator();
-  answerTemplateGenerator();
+  //answerTemplateGenerator();
  
 }
 
-$(main)
+$(main);
 
 
 
 
 // /********** RENDER FUNCTION(S) **********/
 
-// // This function conditionally replaces the contents of the <main> tag based on the state of the data store
-// function renderIt(){
-//   console.log("renderIt function ran")
-//   //replaces content with appropriate next screen
-// }
+// This function conditionally replaces the contents of the <main> tag based on the state of the data store
+function renderIt(state){
+  console.log("renderIt function ran")
+  //replaces content with appropriate next screen
+  $('body').html(`${state}`);
+
+}
 // /********** EVENT HANDLER FUNCTIONS **********/
 
 // // These functions handle events (submit, click, etc)
 
 // function checkAnswer(){
 //   console.log("check answer function ran ")
+//   $('body').on("click", `.submit-question`, function(event) {
+  
+  
+  
+//   }
 //   //on submit of answer, takes in users choice
 //   //also takes questions object
 //   //checks against correctAnswer in questions and returns true/false 

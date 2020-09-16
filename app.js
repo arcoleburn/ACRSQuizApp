@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 /* eslint-disable strict */
 
-const questions = {
+const store = {
   // 5 or more questions are required
   questions: [
     {

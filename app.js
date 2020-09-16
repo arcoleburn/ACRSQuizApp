@@ -55,7 +55,7 @@ const questions = {
     },
     {
       question: "How many sonnets did Shakespeare write? ",
-      answers: ["154", "207", "120", "307"],
+      answers: ["154", "207", "120", "309"],
       correctAnswer: "154",
       funFact:
         "When published in 1609, Shakespeare's sonnets were dedicated to 'W. H', who is thought to be William Herbert, Earl of Pembroke.",

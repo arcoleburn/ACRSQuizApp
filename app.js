@@ -89,7 +89,7 @@ const store = {
 function getQuestion() {
   //this function takes the store and gives the question value for adding to the template
     let num = store.questionNumber;
-    let nextQuestion = store.questions[num].question;
+    let nextQuestion = store.questions[num];
     console.log(nextQuestion);
     return nextQuestion;  
   }
@@ -102,47 +102,47 @@ function questionTemplateGenerator(){
   console.log("q# is: ", questionNum)
 //takes in array/object 
 //generates container for question, along with appropriate buttons
-$("body").html(`<section class="boxit" id="question-screen">
+const template = `<section class="boxit" id="question-screen">
       <form class="container">
         <ul >
-          <p>${question}</p>
+          <p>${question.question}</p>
           <li>
             <input
               type="radio"
               name="quizquestion"
               id="correct"
-              value="correct"
+              value="${question.answers[0]}"
             />
-            <label for="correct">DidIWas Shookspeared</label>
+            <label for="correct">${question.answers[0]}</label>
           </li>
           <li>
             <input
               type="radio"
               name="quizquestion"
               id="quizquestion"
-              value="incorrect1"
+              value="${question.answers[1]}"
             />
-            <label for="incorrect1">BillIBe Spearshakes</label>
+            <label for="incorrect1">${question.answers[1]}</label>
           </li>
           <li>
             <input
               type="radio"
               name="quizquestion"
               id="quizquestion"
-              value="incorrect3"
+              value="${question.answers[2]}"
             />
-            <label for="incorrect2">Billiam Shakenstirred</label>
+            <label for="incorrect2">${question.answers[2]}</label>
           </li>
           <li>
             <input
               type="radio"
               name="quizquestion"
               id="quizquestion"
-              value="incorrect3"
+              value="${question.answers[3]}"
             />
-            <label for="incorrect3">Frank S.</label>
+            <label for="incorrect3">${question.answers[3]}</label>
           </li>
-          <button type="submit">Submit Answer</button>
+          <button type="submit" class="submit-question">Submit Answer</button>
         </ul>
         <div class="innercontainer">
             <p> Question ${questionNum} of 7</p>
@@ -150,7 +150,8 @@ $("body").html(`<section class="boxit" id="question-screen">
         </div>
       </form>
       
-    </section>`);
+    </section>`;
+    renderIt(template);
 }
 
 function answerTemplateGenerator(){
@@ -158,25 +159,41 @@ function answerTemplateGenerator(){
   let score = store.score;
   let totalQuestions = store.questions.length;
   let num = store.questionNumber;
-  let funFact = store.questions[num].funFact; 
+  let funFact = store.questions[num].funFact;
+  let userAnswer = $('input[name="quizquestion"]:checked').val();
+  let correctAnswer = getQuestion().correctAnswer;
+    console.log(userAnswer);
+  let template; 
+  if ( correctAnswer === userAnswer) {
   //generates container for answer screen
   // takes in a true or false 
-  $("body").html(`    <section class="boxit" id="answer-screen">
-        <h2> Correct!</h2>
-        <p>The Correct Answer Was: DidIWas Shookspeared</p>
+  // if statment that checks if the answer is right or wrong and switches the template based on it
+  template = (`<section class="boxit" id="answer-screen">
+        <h2>Correct!</h2>
+        <p>The Correct Answer Was: ${correctAnswer}</p>
         <p>You got ${score} of ${totalQuestions} correct so far.</p>
         <p>Did you Know: ${funFact}</p> 
     </section>`);
+    
+  } else {
+    template = `<section class="boxit" id="answer-screen">
+        <h2> InCorrect!</h2>
+        <p>The Correct Answer Was: ${correctAnswer}</p>
+        <p>You got ${score} of ${totalQuestions} correct so far.</p>
+        <p>Did you Know: ${funFact}</p> 
+    </section>`;
+  }
+  renderIt(template); 
 }
-
 function welcomeScreenGenerator(){
   console.log("welcomescreen generator fn ran");
   //no inputs 
   //when site is loaded, generates "Welcome" and a start quiz button
-$('body').html(`<section class="boxit" id="welcome-screen">
+const template = `<section class="boxit" id="welcome-screen">
       <h1>Shakespeare Quiz App</h1>
       <button class='start-button'>Click Here to start Quiz</button>
-    </section>`);
+    </section>`;
+    renderIt(template);
 }
 
 function conclusionGenerator() {
@@ -203,12 +220,13 @@ function conclusionGenerator() {
 
 
 function main() {
-  //welcomeScreenGenerator(); 
   renderIt();
-  conclusionGenerator();
-  //questionTemplateGenerator();
+  //welcomeScreenGenerator(); 
+  questionTemplateGenerator();
   //answerTemplateGenerator();
- 
+  //conclusionGenerator();
+  // Event Linsteners below
+  checkAnswer(); 
 }
 
 $(main);
@@ -229,13 +247,13 @@ function renderIt(state){
 
 // // These functions handle events (submit, click, etc)
 
-// function checkAnswer(){
-//   console.log("check answer function ran ")
-//   $('body').on("click", `.submit-question`, function(event) {
-  
-  
-  
-//   }
+function checkAnswer(){
+  console.log("check answer function ran ")
+  $('body').on("click", `.submit-question`, function(event) {
+    event.preventDefault();
+    answerTemplateGenerator();
+  });
+}
 //   //on submit of answer, takes in users choice
 //   //also takes questions object
 //   //checks against correctAnswer in questions and returns true/false 

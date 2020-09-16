@@ -1,4 +1,37 @@
-body section{
-    border: 5px solid;
-    border-color: black 
+.container {
+    display:flex;
+    flex-direction: column;
+    width: 350px;
+    
+    
 }
+
+
+.innercontainer{
+    display: flex;
+    justify-content: space-around ;
+}
+
+ul{
+    list-style-type: none;
+    padding:5px
+}
+.boxit{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    width: 350px;
+    margin:35px;
+    min-height:150px
+}
+.boxit h1,h2,p {
+    text-align: center;
+}
+
+section button{
+    margin-bottom: 15px;
+}
+ul button{
+    margin-left: 100px;
+}
+

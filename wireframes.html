@@ -1,19 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Document</title>
-    <link rel="stylesheet" href="wireframes.css" type="text/css">
-</head>
-<body>
-    <section>
-        <h1>Shakespeare Quiz App</h1>
-        <button> Click Here to start Quiz</button>
+    <link rel="stylesheet" href="wireframe.css" type="text/css" />
+  </head>
+  <body>
+      <p>welcome page</p>
+    <section class="boxit" id="welcome-screen">
+      <h1>Shakespeare Quiz App</h1>
+      <button>Click Here to start Quiz</button>
     </section>
-    <form>
-        <section id="question">
+<p> question page</p>
+    <section class="boxit" id="question-screen">
+      <form class="container">
+        <ul >
+          <p>What is the past tense of William Shakespeare?</p>
+          <li>
+            <input
+              type="radio"
+              name="quizquestion"
+              id="correct"
+              value="correct"
+            />
+            <label for="correct">DidIWas Shookspeared</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="quizquestion"
+              id="quizquestion"
+              value="incorrect1"
+            />
+            <label for="incorrect1">BillIBe Spearshakes</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="quizquestion"
+              id="quizquestion"
+              value="incorrect3"
+            />
+            <label for="incorrect2">Billiam Shakenstirred</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="quizquestion"
+              id="quizquestion"
+              value="incorrect3"
+            />
+            <label for="incorrect3">Frank S.</label>
+          </li>
+          <button type="submit">Submit Answer</button>
+        </ul>
+        <div class="innercontainer">
+            <p> Question 3 of 10</p>
+            <p> 2 of 2 Correct so far!</p>
+        </div>
+      </form>
+      
+    </section>
+<p>answer page</p>
+    <section class="boxit" id="answer-screen">
+        <h2> Correct!</h2>
+        <p>The Correct Answer Was: DidIWas Shookspeared</p>
+        <p>youve answered 3 of 3 questions correct so far</p>
+        <p>Did you Know: That this question was 100% made up?</p> 
+    </section>
+    <p>final page</p>
+    <section class="boxit" id="answer-screen">
+        <h2>Congrats!</h2>
+        <p>You got 10 of 10 correct</p>
+        <p> Click the button below to try again.</p>
+        <button> Once More into the Breach!</button>
 
-        </section>
-</body>
+    </section>
+  </body>
 </html>

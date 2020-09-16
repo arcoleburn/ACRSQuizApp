@@ -9,7 +9,7 @@ const questions = {
         "It was around 1595 when Shakespeare wrote 'Romeo and Juliet,' everyone's favorite 'romance' where all the lovers die. In what year did Shakespeare himself *ahem* ...exit stage left?",
       answers: ["1599", "1702", "1616", "1542"],
       correctAnswer: "1616",
-      funFact: "",
+      funFact: "something about shakespeares death",
     },
     {
       question:
@@ -85,10 +85,63 @@ const questions = {
 
 // These functions return HTML templates
 
+function questionTemplateGenerator(){
+  console.log('`templateGenerator` fn ran')
+//takes in array/object 
+//generates container for question, along with appropriate buttons
+}
+
+function answerTemplateGenerator(){
+  console.log('answer generator ran')
+  //generates container for answer screen 
+}
+
+function welcomeScreenGenerator(){
+  console.log("welcomescreen generator fn ran")
+  //no inputs 
+  //when site is loaded, generates "Welcome" and a start quiz button
+}
+
+function conclusionGenerator(){
+  console.log("conclusion generator fn ran")
+  //take in questions object 
+  //output window with final score, button to retake quiz
+}
+
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
-
+function renderIt(){
+  console.log("renderIt function ran")
+  //replaces content with appropriate next screen
+}
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+function checkAnswer(){
+  console.log("check answer function ran ")
+  //on submit of answer, takes in users choice
+  //also takes questions object
+  //checks against correctAnswer in questions and returns true/false 
+}
+
+
+$(/*listen to welcome screen)*/.on('click', '.start-button', function(){
+  //render the first question screen
+})
+
+$(/*listen to question screen)*/.on('click', '.answer-button', function(){
+  //check if answer correct
+  //give appropriate response screen 
+})
+
+$(/*listen to answer screen*/.on('click', '.next-button', function(){
+  //render the next question with updated stats 
+})
+
+$(/*listen to final screen*/).on('click','try-again-button', function(){
+  //reset stats
+  //render the welcome screen 
+})

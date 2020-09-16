@@ -93,7 +93,8 @@ function questionTemplateGenerator(){
 
 function answerTemplateGenerator(){
   console.log('answer generator ran')
-  //generates container for answer screen 
+  //generates container for answer screen
+  // takes in a true or false 
 }
 
 function welcomeScreenGenerator(){
@@ -111,7 +112,7 @@ function conclusionGenerator(){
 
 /********** RENDER FUNCTION(S) **********/
 
-// This function conditionally replaces the contents of the <main> tag based on the state of the store
+// This function conditionally replaces the contents of the <main> tag based on the state of the data store
 function renderIt(){
   console.log("renderIt function ran")
   //replaces content with appropriate next screen

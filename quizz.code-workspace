@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../JQuery Exercises/return-of-fizz-buzz"
+		},
+		{
+			"path": "../JQuery Exercises/cat-carousel"
+		},
+		{
+			"path": "../shopping-list-master"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "quizz"
+	}
+}

@@ -23,7 +23,7 @@ const store = {
       question:
         "Hamlet has the most lines of any characer in Shakespeare at 1,506. Which of these other titular character has the fewest lines?",
       answers: ["Timon", "Troilus", "Juliet", "King John"],
-      correctAnswer: "King John (437)",
+      correctAnswer: "King John",
       funFact:
         "The title character with the fewest lines in all of Shakespeare is Julius Caesar, who manages to get out 151 lines before being murdered in Act III, Scene I of his own play.",
     },
@@ -85,24 +85,22 @@ const store = {
 
 // These functions return HTML templates
 
-
 function getQuestion() {
   //this function takes the store and gives the question value for adding to the template
-    let num = store.questionNumber;
-    let nextQuestion = store.questions[num];
-    console.log(nextQuestion);
-    return nextQuestion;  
-  }
-  
+  let num = store.questionNumber;
+  let nextQuestion = store.questions[num];
+  console.log(nextQuestion);
+  return nextQuestion;
+}
 
-function questionTemplateGenerator(){
-  let questionNum=store.questionNumber
-  console.log('`templateGenerator` fn ran')
-  let question=getQuestion()
-  console.log("q# is: ", questionNum)
-//takes in array/object 
-//generates container for question, along with appropriate buttons
-const template = `<section class="boxit" id="question-screen">
+function questionTemplateGenerator() {
+  let questionNum = store.questionNumber;
+  console.log("`templateGenerator` fn ran");
+  let question = getQuestion();
+  console.log("q# is: ", questionNum);
+  //takes in array/object
+  //generates container for question, along with appropriate buttons
+  const template = `<section class="boxit" id="question-screen">
       <form class="container">
         <ul >
           <p>${question.question}</p>
@@ -151,49 +149,60 @@ const template = `<section class="boxit" id="question-screen">
       </form>
       
     </section>`;
-    renderIt(template);
+  renderIt(template);
 }
 
-function answerTemplateGenerator(){
-  console.log('answer generator ran')
+function answerTemplateGenerator() {
+  console.log("answer generator ran");
   let score = store.score;
   let totalQuestions = store.questions.length;
   let num = store.questionNumber;
   let funFact = store.questions[num].funFact;
   let userAnswer = $('input[name="quizquestion"]:checked').val();
   let correctAnswer = getQuestion().correctAnswer;
-    console.log(userAnswer);
-  let template; 
-  if ( correctAnswer === userAnswer) {
-  //generates container for answer screen
-  // takes in a true or false 
-  // if statment that checks if the answer is right or wrong and switches the template based on it
-  template = (`<section class="boxit" id="answer-screen">
+  console.log(userAnswer);
+  let template;
+  if (correctAnswer === userAnswer) {
+    store.score += 1;
+    store.questionNumber += 1;
+    //generates container for answer screen
+    // takes in a true or false
+    // if statment that checks if the answer is right or wrong and switches the template based on it
+    template = `<section class="boxit" id="answer-screen">
         <h2>Correct!</h2>
         <p>The Correct Answer Was: ${correctAnswer}</p>
-        <p>You got ${score} of ${totalQuestions} correct so far.</p>
-        <p>Did you Know: ${funFact}</p> 
-    </section>`);
-    
+        <p>You got ${
+          score + 1
+        } of ${totalQuestions} correct so far.</p>
+        <p>Did you Know: ${funFact}</p>
+        `;
   } else {
+    store.questionNumber += 1;
     template = `<section class="boxit" id="answer-screen">
-        <h2> InCorrect!</h2>
+        <h2> Incorrect!</h2>
         <p>The Correct Answer Was: ${correctAnswer}</p>
-        <p>You got ${score} of ${totalQuestions} correct so far.</p>
+        <p>You got ${
+          score + 1
+        } of ${totalQuestions} correct so far.</p>
         <p>Did you Know: ${funFact}</p> 
-    </section>`;
+    `;
   }
-  renderIt(template); 
+  if (store.questionNumber===store.questions.length){
+    template+= "<button class='finish-quiz'>Finish Quiz</button></section>"
+  }else{
+    template+= "<button class='next-question'>Next Question</button></section>"
+  }
+  renderIt(template);
 }
-function welcomeScreenGenerator(){
+function welcomeScreenGenerator() {
   console.log("welcomescreen generator fn ran");
-  //no inputs 
+  //no inputs
   //when site is loaded, generates "Welcome" and a start quiz button
-const template = `<section class="boxit" id="welcome-screen">
+  const template = `<section class="boxit" id="welcome-screen">
       <h1>Shakespeare Quiz App</h1>
-      <button class='start-button'>Click Here to start Quiz</button>
+      <button class='next-question' id="start">Click Here to start Quiz</button>
     </section>`;
-    renderIt(template);
+  renderIt(template);
 }
 
 function conclusionGenerator() {
@@ -202,78 +211,109 @@ function conclusionGenerator() {
   //output window with final score, button to retake quiz
   let score = store.score;
   let totalQuestions = store.questions.length;
-  const template = (`<section class="boxit" id="answer-screen">
+  const template = `<section class="boxit" id="answer-screen">
         <h2>Congrats!</h2>
         <p>You got ${score} of ${totalQuestions} correct</p>
         <p> Click the button below to try again.</p>
-        <button> Once More unto the Breach!</button>
+        <button class="again-button"> Once More unto the Breach!</button>
 
-    </section>`);
-    renderIt(template);
+    </section>`;
+  renderIt(template);
 }
-
 
 // stop the default behavior of the start button
 // $(".start-button").submit((e) => {
 //     e.preventDefault();
 //   };
 
-
 function main() {
   renderIt();
-  //welcomeScreenGenerator(); 
-  questionTemplateGenerator();
+  welcomeScreenGenerator();
+  startQuiz();
   //answerTemplateGenerator();
   //conclusionGenerator();
   // Event Linsteners below
-  checkAnswer(); 
+  checkAnswer();
+  nextQuestion();
+  finishQuiz()
+  onceMore()
 }
 
 $(main);
 
-
-
-
 // /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the data store
-function renderIt(state){
-  console.log("renderIt function ran")
+function renderIt(state) {
+  console.log("renderIt function ran");
   //replaces content with appropriate next screen
-  $('body').html(`${state}`);
-
+  $("body").html(`${state}`);
 }
 // /********** EVENT HANDLER FUNCTIONS **********/
 
 // // These functions handle events (submit, click, etc)
-
-function checkAnswer(){
-  console.log("check answer function ran ")
-  $('body').on("click", `.submit-question`, function(event) {
+function startQuiz() {
+  console.log("start quiz ran");
+  $("body").on("click", ".start-button", function (evt) {
+    evt.preventDefault()
+    nextQuestion();
+  });
+}
+function checkAnswer() {
+  console.log("check answer function ran ");
+  $("body").on("click", `.submit-question`, function (event) {
     event.preventDefault();
     answerTemplateGenerator();
   });
 }
 //   //on submit of answer, takes in users choice
 //   //also takes questions object
-//   //checks against correctAnswer in questions and returns true/false 
+//   //checks against correctAnswer in questions and returns true/false
 // }
-
-
+function nextQuestion() {
+  console.log("next q ran");
+  $("body").on("click", ".next-question", function (evt) {
+    evt.preventDefault();
+    questionTemplateGenerator();
+  });
+}
+function startQuiz() {
+  console.log("start quiz ran");
+  $("body").on("click", "#start", function (evt) {
+    nextQuestion();
+  });
+}
+function finishQuiz(){
+  console.log("finish quiz ran")
+  $("body").on('click','.finish-quiz',function(evt){
+    evt.preventDefault()
+    conclusionGenerator()
+  })
+}
+function onceMore(){
+  console.log("once more ran")
+  $("body").on('click','.again-button',function(evt){
+    
+    store.questions.score=0
+    store.questions.questionNumber=0
+    location.reload()
+    welcomeScreenGenerator()
+  })
+}
 // $(/*listen to welcome screen)*/.on('click', '.start-button', function(){
 //   //render the first question screen
 // })
 
 // $(/*listen to question screen)*/.on('click', '.answer-button', function(){
 //   //check if answer correct
-//   //give appropriate response screen 
+//   //give appropriate response screen
 // })
 
 // $(/*listen to answer screen*/.on('click', '.next-button', function(){
-//   //render the next question with updated stats 
+//   //render the next question with updated stats
 // })
 
 // $(/*listen to final screen*/).on('click','try-again-button', function(){
 //   //reset stats
-//   //render the welcome screen 
+//   //render the welcome screen
 // })

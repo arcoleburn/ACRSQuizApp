@@ -85,14 +85,27 @@ const store = {
 
 // These functions return HTML templates
 
-function questionTemplateGenerator(store){
+
+function getQuestion() {
+  //this function takes the store and gives the quest value for adding to the template
+    let num = store.questionNumber;
+    let nextQuestion = store.questions[num].question
+    console.log(nextQuestion);
+    return nextQuestion;  
+  }
+  
+
+function questionTemplateGenerator(){
+  let questionNum=store.questionNumber
   console.log('`templateGenerator` fn ran')
+  let question=getQuestion()
+  console.log("q# is: ", questionNum)
 //takes in array/object 
 //generates container for question, along with appropriate buttons
 $("body").html(`<section class="boxit" id="question-screen">
       <form class="container">
         <ul >
-          <p>${store.questions[0].question}</p>
+          <p>${question}</p>
           <li>
             <input
               type="radio"
@@ -132,20 +145,12 @@ $("body").html(`<section class="boxit" id="question-screen">
           <button type="submit">Submit Answer</button>
         </ul>
         <div class="innercontainer">
-            <p> Question 3 of 10</p>
+            <p> Question ${questionNum} of 7</p>
             <p> 2 of 2 Correct so far!</p>
         </div>
       </form>
       
     </section>`);
-}
-
-function getQuestion() {
-//this function takes the store and gives the quest value for adding to the template
-  let num = store.questionNumber;
-  let nextQuestion = store.questions[num].question
-  console.log(nextQuestion);
-  return nextQuestion;  
 }
 
 // function answerTemplateGenerator(){
@@ -173,8 +178,9 @@ $('body').html(`<section class="boxit" id="welcome-screen">
 
 function main() {
   //welcomeScreenGenerator(); 
-  //questionTemplateGenerator();
-  getQuestion(); 
+
+  questionTemplateGenerator();
+ 
 }
 
 $(main)

@@ -62,7 +62,7 @@ const store = {
     },
   ],
   quizStarted: false,
-  questionNumber: 2,
+  questionNumber: 0,
   score: 0,
 };
 
@@ -89,7 +89,7 @@ const store = {
 function getQuestion() {
   //this function takes the store and gives the quest value for adding to the template
     let num = store.questionNumber;
-    let nextQuestion = store.questions[num].question
+    let nextQuestion = store.questions[num].question;
     console.log(nextQuestion);
     return nextQuestion;  
   }
@@ -153,15 +153,24 @@ $("body").html(`<section class="boxit" id="question-screen">
     </section>`);
 }
 
-// function answerTemplateGenerator(){
-//   console.log('answer generator ran')
-//   //generates container for answer screen
-//   // takes in a true or false 
-// }
+function answerTemplateGenerator(){
+  console.log('answer generator ran')
+  let score = store.score;
+  let totalQuestions = store.questions.length;
+  let num = store.questionNumber;
+  let funFact = store.questions[num].funFact; 
+  //generates container for answer screen
+  // takes in a true or false 
+  $("body").html(`    <section class="boxit" id="answer-screen">
+        <h2> Correct!</h2>
+        <p>The Correct Answer Was: DidIWas Shookspeared</p>
+        <p>You got ${score} of ${totalQuestions} correct so far.</p>
+        <p>Did you Know: ${funFact}</p> 
+    </section>`);
+}
 
 function welcomeScreenGenerator(){
   console.log("welcomescreen generator fn ran");
-
   //no inputs 
   //when site is loaded, generates "Welcome" and a start quiz button
 $('body').html(`<section class="boxit" id="welcome-screen">
@@ -169,6 +178,22 @@ $('body').html(`<section class="boxit" id="welcome-screen">
       <button class='start-button'>Click Here to start Quiz</button>
     </section>`);
 }
+
+function conclusionGenerator() {
+  console.log("conclusion generator fn ran");
+  //take in questions object
+  //output window with final score, button to retake quiz
+  let score = store.score;
+  let totalQuestions = store.questions.length;
+  $("body").html(`<section class="boxit" id="answer-screen">
+        <h2>Congrats!</h2>
+        <p>You got ${score} of ${totalQuestions} correct</p>
+        <p> Click the button below to try again.</p>
+        <button> Once More unto the Breach!</button>
+
+    </section>`);
+}
+
 
 // stop the default behavior of the start button
 // $(".start-button").submit((e) => {
@@ -178,17 +203,15 @@ $('body').html(`<section class="boxit" id="welcome-screen">
 
 function main() {
   //welcomeScreenGenerator(); 
-
-  questionTemplateGenerator();
+  //conclusionGenerator();
+  //questionTemplateGenerator();
+  answerTemplateGenerator();
  
 }
 
 $(main)
-// function conclusionGenerator(){
-//   console.log("conclusion generator fn ran")
-//   //take in questions object 
-//   //output window with final score, button to retake quiz
-// }
+
+
 
 
 // /********** RENDER FUNCTION(S) **********/

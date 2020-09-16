@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 /* eslint-disable strict */
 
-const questions = {
+const store = {
   // 5 or more questions are required
   questions: [
     {
@@ -62,7 +62,7 @@ const questions = {
     },
   ],
   quizStarted: false,
-  questionNumber: 0,
+  questionNumber: 2,
   score: 0,
 };
 
@@ -85,64 +85,139 @@ const questions = {
 
 // These functions return HTML templates
 
-function questionTemplateGenerator(){
+function questionTemplateGenerator(store){
   console.log('`templateGenerator` fn ran')
 //takes in array/object 
 //generates container for question, along with appropriate buttons
+$("body").html(`<section class="boxit" id="question-screen">
+      <form class="container">
+        <ul >
+          <p>${store.questions[0].question}</p>
+          <li>
+            <input
+              type="radio"
+              name="quizquestion"
+              id="correct"
+              value="correct"
+            />
+            <label for="correct">DidIWas Shookspeared</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="quizquestion"
+              id="quizquestion"
+              value="incorrect1"
+            />
+            <label for="incorrect1">BillIBe Spearshakes</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="quizquestion"
+              id="quizquestion"
+              value="incorrect3"
+            />
+            <label for="incorrect2">Billiam Shakenstirred</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              name="quizquestion"
+              id="quizquestion"
+              value="incorrect3"
+            />
+            <label for="incorrect3">Frank S.</label>
+          </li>
+          <button type="submit">Submit Answer</button>
+        </ul>
+        <div class="innercontainer">
+            <p> Question 3 of 10</p>
+            <p> 2 of 2 Correct so far!</p>
+        </div>
+      </form>
+      
+    </section>`);
 }
 
-function answerTemplateGenerator(){
-  console.log('answer generator ran')
-  //generates container for answer screen
-  // takes in a true or false 
+function getQuestion() {
+//this function takes the store and gives the quest value for adding to the template
+  let num = store.questionNumber;
+  let nextQuestion = store.questions[num].question
+  console.log(nextQuestion);
+  return nextQuestion;  
 }
+
+// function answerTemplateGenerator(){
+//   console.log('answer generator ran')
+//   //generates container for answer screen
+//   // takes in a true or false 
+// }
 
 function welcomeScreenGenerator(){
-  console.log("welcomescreen generator fn ran")
+  console.log("welcomescreen generator fn ran");
+
   //no inputs 
   //when site is loaded, generates "Welcome" and a start quiz button
+$('body').html(`<section class="boxit" id="welcome-screen">
+      <h1>Shakespeare Quiz App</h1>
+      <button class='start-button'>Click Here to start Quiz</button>
+    </section>`);
 }
 
-function conclusionGenerator(){
-  console.log("conclusion generator fn ran")
-  //take in questions object 
-  //output window with final score, button to retake quiz
+// stop the default behavior of the start button
+// $(".start-button").submit((e) => {
+//     e.preventDefault();
+//   };
+
+
+function main() {
+  //welcomeScreenGenerator(); 
+  //questionTemplateGenerator();
+  getQuestion(); 
 }
 
-
-/********** RENDER FUNCTION(S) **********/
-
-// This function conditionally replaces the contents of the <main> tag based on the state of the data store
-function renderIt(){
-  console.log("renderIt function ran")
-  //replaces content with appropriate next screen
-}
-/********** EVENT HANDLER FUNCTIONS **********/
-
-// These functions handle events (submit, click, etc)
-
-function checkAnswer(){
-  console.log("check answer function ran ")
-  //on submit of answer, takes in users choice
-  //also takes questions object
-  //checks against correctAnswer in questions and returns true/false 
-}
+$(main)
+// function conclusionGenerator(){
+//   console.log("conclusion generator fn ran")
+//   //take in questions object 
+//   //output window with final score, button to retake quiz
+// }
 
 
-$(/*listen to welcome screen)*/.on('click', '.start-button', function(){
-  //render the first question screen
-})
+// /********** RENDER FUNCTION(S) **********/
 
-$(/*listen to question screen)*/.on('click', '.answer-button', function(){
-  //check if answer correct
-  //give appropriate response screen 
-})
+// // This function conditionally replaces the contents of the <main> tag based on the state of the data store
+// function renderIt(){
+//   console.log("renderIt function ran")
+//   //replaces content with appropriate next screen
+// }
+// /********** EVENT HANDLER FUNCTIONS **********/
 
-$(/*listen to answer screen*/.on('click', '.next-button', function(){
-  //render the next question with updated stats 
-})
+// // These functions handle events (submit, click, etc)
 
-$(/*listen to final screen*/).on('click','try-again-button', function(){
-  //reset stats
-  //render the welcome screen 
-})
+// function checkAnswer(){
+//   console.log("check answer function ran ")
+//   //on submit of answer, takes in users choice
+//   //also takes questions object
+//   //checks against correctAnswer in questions and returns true/false 
+// }
+
+
+// $(/*listen to welcome screen)*/.on('click', '.start-button', function(){
+//   //render the first question screen
+// })
+
+// $(/*listen to question screen)*/.on('click', '.answer-button', function(){
+//   //check if answer correct
+//   //give appropriate response screen 
+// })
+
+// $(/*listen to answer screen*/.on('click', '.next-button', function(){
+//   //render the next question with updated stats 
+// })
+
+// $(/*listen to final screen*/).on('click','try-again-button', function(){
+//   //reset stats
+//   //render the welcome screen 
+// })

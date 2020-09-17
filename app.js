@@ -107,7 +107,7 @@ function questionTemplateGenerator() {
   const template = `<section class="boxit" id="question-screen">
       <form class="container">
         <ul >
-          <p>${question.question}</p>
+          <div class='textbox'><p>${question.question}</p></div>
           <li>
             <input
               type="radio"
@@ -181,7 +181,7 @@ function answerTemplateGenerator() {
         <p>You got ${
           score + 1
         } of ${totalQuestions} correct so far.</p>
-        <p>Did you Know: ${funFact}</p>
+        <p class='text-left'>Did you Know: ${funFact}</p>
         `;
   } else {
     store.questionNumber += 1;
@@ -189,9 +189,9 @@ function answerTemplateGenerator() {
         <h2> Incorrect!</h2>
         <p>The Correct Answer Was: ${correctAnswer}</p>
         <p>You got ${
-          score + 1
+          score
         } of ${totalQuestions} correct so far.</p>
-        <p>Did you Know: ${funFact}</p> 
+        <p class='text-left'>Did you Know: ${funFact}</p> 
     `;
   }
   if (store.questionNumber === store.questions.length) {
@@ -208,7 +208,7 @@ function welcomeScreenGenerator() {
   //no inputs
   //when site is loaded, generates "Welcome" and a start quiz button
   const template = `<section class="boxit" id="welcome-screen">
-      <h1>Shakespeare Quiz App</h1>
+      <h1>Shakespeare Quiz</h1>
       <button class='next-question' id="start">Click Here to start Quiz</button>
     </section>`;
   renderIt(template);

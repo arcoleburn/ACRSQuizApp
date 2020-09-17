@@ -50,5 +50,36 @@ body{
   display:flex;
   
   flex-direction: row;
-  align-content: space-between;
+  justify-content: space-between;
+  margin: 0px 8px 0px 8px; 
+}
+
+li {
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px; 
+  width: 100%; 
+}
+
+.text-left {
+  text-align: left; 
+  margin: 0px 4px 0px 14px;
+}
+
+@media all and (min-width:600px) {
+
+.boxit {
+
+  border: 3px solid blue;
+  width: 500px;
+  
+}
+
+}
+
+.textbox {
+
+    all: inherit;
 }

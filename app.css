@@ -18,19 +18,24 @@
   text-align: center;
     display: flex;
     flex-direction: column;
-    border: 1px solid gray;
     width: 300px;
     margin:5px;
     padding: 5px 0px 5px 0px;
-   
+   border-radius: 2%;
     height: auto;
+    background-color: rgba(0,0,0,0.75);
+    color: white;
 }
 
 body{
   display: grid;
   place-items: center;
   height: 100vh;
-  padding-bottom: 200px
+  padding-bottom: 200px;
+  background-image: url('https://render.fineartamerica.com/images/rendered/share/3248382&domainId=1'); 
+  background-size: 122%;
+  background-position: center;
+  box-shadow: inset 0px 0px 40px 40px #0000
 }
 
 #question-screen{
@@ -50,5 +55,9 @@ body{
   display:flex;
   
   flex-direction: row;
-  align-content: space-between;
+  justify-content: space-between;
+}
+
+button{
+  width: 100%
 }

@@ -10,3 +10,45 @@
 /** add the class of .start-button to the welcome screen button
 
 /** add a class to the submit button of each question screen that has the class of .submit-question
+**/
+*{
+  box-sizing: border-box;
+}
+.boxit{
+  text-align: center;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    width: 300px;
+    margin:5px;
+    padding: 5px 0px 5px 0px;
+   
+    height: auto;
+}
+
+body{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  padding-bottom: 200px
+}
+
+#question-screen{
+  text-align: left;
+}
+
+#question-screen ul{
+  padding: 15px;
+  list-style: none;
+}
+.container{
+  display:flex;
+  flex-direction: column;
+
+}
+.innercontainer{
+  display:flex;
+  
+  flex-direction: row;
+  align-content: space-between;
+}

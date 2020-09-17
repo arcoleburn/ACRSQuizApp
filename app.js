@@ -148,10 +148,10 @@ function questionTemplateGenerator() {
           <button type="submit" class="submit-question">Submit Answer</button>
         </ul>
         <div class="innercontainer">
-            <p> Question ${questionNum + 1} of ${
+            <div><p> Question ${questionNum + 1} of ${
     store.questions.length
-  }</p>
-            <p> ${store.score} of ${questionNum} Correct so far!</p>
+  }</p></div>
+            <div><p> ${store.score} of ${questionNum} Correct so far!</p></div>
         </div>
       </form>
       

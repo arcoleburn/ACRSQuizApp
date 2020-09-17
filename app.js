@@ -32,16 +32,16 @@ const store = {
     },
     {
       question:
-        "First published 18 years after his death, which was the last play published by Shakespeare?",
+        "First published 18 years after his death, which was the last play written by Shakespeare?",
       answers: [
         "Henry VIII",
-        "The Noble Kinsmen",
-        "Cymbleine",
+        "The Two Noble Kinsmen",
+        "Cymbeline",
         "Othello",
       ],
-      correctAnswer: "The Noble Kinsmen",
+      correctAnswer: "The Two Noble Kinsmen",
       funFact:
-        "Scholars attribute 'The Noble Kinsmen' to both Shakespeare, and John Fletcher.",
+        "Scholars attribute 'The Two Noble Kinsmen' to both Shakespeare and his contemporary, John Fletcher.",
     },
     {
       question:
@@ -57,7 +57,7 @@ const store = {
         "Sir Henry Irving was perhaps the most famous actor of the Victorian Era. He was the first actor ever to be knighted, receiving the honor in 1895.",
     },
     {
-      question: "How many sonnets did Shakespeare write? ",
+      question: "Apart from the ones written into his plays, how many sonnets is Shakespeare thought to have written? ",
       answers: ["154", "207", "120", "309"],
       correctAnswer: "154",
       funFact:

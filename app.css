@@ -18,6 +18,12 @@ h1{
   font-family:'Grenze Gotisch', cursive;
   font-weight: 700 ;
 }
+h2{
+  font-family:'Grenze Gotisch', cursive;
+  font-weight: 700 ;
+  text-align:center;
+}  
+
 .boxit{
   text-align: center;
     display: flex;
@@ -38,11 +44,11 @@ body{
   height: 100vh;
   padding-bottom: 200px;
   padding-top: 50px;
-  background-image: url('https://render.fineartamerica.com/images/rendered/share/3248382&domainId=1'); 
-  background-size: cover;
+  background-image: url('https://render.fineartamerica.com/images/rendered/share/3248382&domainId=1'),url(background-paint.PNG); 
+  background-size: cover, cover;
   background-repeat: no-repeat;
   background-position: center;
-
+  background-blend-mode:normal, luminosity;
 }
 
 #question-screen{
@@ -50,8 +56,18 @@ body{
 }
 
 #question-screen ul{
-  padding: 15px;
+  padding: 0px 15px 0px 15px;
   list-style: none;
+  margin-top: 0px
+}
+#question-screen ul div{
+  margin:5px;
+  padding: 0px;
+  margin-top:0
+}
+#question-screen ul div p{
+margin-left: 0; 
+margin-right: 0;
 }
 .container{
   display:flex;
@@ -66,22 +82,36 @@ body{
 }
 
 button{
-  width: 100%
+  width: 100%;
   margin: 0px 8px 0px 8px; 
+  font-family:'Grenze Gotisch', cursive;
+  font-weight: 700 ;
 }
 
+ul, p{
+  font-family:'Grenze Gotisch', cursive;
+  font-weight: 200;
+  font-size: 2.8vmax;
+  margin:15px;
+  margin-top:0
+}
 li {
   margin-top: 10px;
+ 
 }
 
 button {
   margin-top: 10px; 
-  width: 100%; 
+  width: 100%;
+  background-color: #000000;
+  color:white
 }
 
 .text-left {
   text-align: left; 
-  margin: 0px 4px 0px 14px;
+  margin: 0px 4px 10px 14px;
+  font-family:'Grenze Gotisch', cursive;
+  font-weight: 200;
 }
 
 @media all and (min-width:600px) {
@@ -102,9 +132,13 @@ button {
 
 body{
  
-  background-image: url('https://render.fineartamerica.com/images/rendered/share/3248382&domainId=1'); 
-  background-size: contain;
+  background-image: url('https://render.fineartamerica.com/images/rendered/share/3248382&domainId=1'), url(background-paint.PNG); 
+  background-size: contain, cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center, left top;
+  background-blend-mode: normal, darken;
+}
 
+ul, p {
+  font-size: 2vmax;
 }

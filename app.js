@@ -106,6 +106,7 @@ function questionTemplateGenerator() {
   //generates container for question, along with appropriate buttons
   const template = `<section class="boxit" id="question-screen">
       <form class="container">
+      <h2> SHAKESPEARE QUIZ</H2>
         <ul >
           <div class='textbox'><p>${question.question}</p></div>
           <li>
@@ -181,7 +182,8 @@ function answerTemplateGenerator() {
         <p>You got ${
           score + 1
         } of ${totalQuestions} correct so far.</p>
-        <p class='text-left'>Did you Know: ${funFact}</p>
+        <p>Did you Know?</p>
+        <p class='text-left'> ${funFact}</p>
         `;
   } else {
     store.questionNumber += 1;
@@ -191,7 +193,8 @@ function answerTemplateGenerator() {
         <p>You got ${
           score
         } of ${totalQuestions} correct so far.</p>
-        <p class='text-left'>Did you Know: ${funFact}</p> 
+        <p>Did you Know?</p>
+        <p class='text-left'> ${funFact}</p>
     `;
   }
   if (store.questionNumber === store.questions.length) {

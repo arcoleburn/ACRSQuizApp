@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable indent */
 /* eslint-disable quotes */
 /* eslint-disable strict */
 
@@ -9,7 +11,8 @@ const store = {
         "It was around 1595 when Shakespeare wrote 'Romeo and Juliet,' everyone's favorite 'romance' where all the lovers die. In what year did Shakespeare himself *ahem* ...exit stage left?",
       answers: ["1599", "1702", "1616", "1542"],
       correctAnswer: "1616",
-      funFact: "something about shakespeares death",
+      funFact:
+        "Not much is known about Shakespeare's death, but one theory holds that he died of a fever contracted after a drinking binge with a couple fellow playwrights",
     },
     {
       question:
@@ -95,6 +98,7 @@ function getQuestion() {
 
 function questionTemplateGenerator() {
   let questionNum = store.questionNumber;
+
   console.log("`templateGenerator` fn ran");
   let question = getQuestion();
   console.log("q# is: ", questionNum);
@@ -109,7 +113,8 @@ function questionTemplateGenerator() {
               type="radio"
               name="quizquestion"
               id="correct"
-              value="${question.answers[0]}"
+              value="${question.answers[0]}" 
+              required
             />
             <label for="correct">${question.answers[0]}</label>
           </li>
@@ -143,8 +148,10 @@ function questionTemplateGenerator() {
           <button type="submit" class="submit-question">Submit Answer</button>
         </ul>
         <div class="innercontainer">
-            <p> Question ${questionNum} of 7</p>
-            <p> 2 of 2 Correct so far!</p>
+            <p> Question ${questionNum + 1} of ${
+    store.questions.length
+  }</p>
+            <p> ${store.score} of ${questionNum} Correct so far!</p>
         </div>
       </form>
       
@@ -160,7 +167,7 @@ function answerTemplateGenerator() {
   let funFact = store.questions[num].funFact;
   let userAnswer = $('input[name="quizquestion"]:checked').val();
   let correctAnswer = getQuestion().correctAnswer;
-  console.log(userAnswer);
+  console.log("user ans is: ", userAnswer);
   let template;
   if (correctAnswer === userAnswer) {
     store.score += 1;
@@ -187,10 +194,12 @@ function answerTemplateGenerator() {
         <p>Did you Know: ${funFact}</p> 
     `;
   }
-  if (store.questionNumber===store.questions.length){
-    template+= "<button class='finish-quiz'>Finish Quiz</button></section>"
-  }else{
-    template+= "<button class='next-question'>Next Question</button></section>"
+  if (store.questionNumber === store.questions.length) {
+    template +=
+      "<button class='finish-quiz'>Finish Quiz</button></section>";
+  } else {
+    template +=
+      "<button class='next-question'>Next Question</button></section>";
   }
   renderIt(template);
 }
@@ -221,22 +230,14 @@ function conclusionGenerator() {
   renderIt(template);
 }
 
-// stop the default behavior of the start button
-// $(".start-button").submit((e) => {
-//     e.preventDefault();
-//   };
-
 function main() {
   renderIt();
   welcomeScreenGenerator();
   startQuiz();
-  //answerTemplateGenerator();
-  //conclusionGenerator();
-  // Event Linsteners below
   checkAnswer();
   nextQuestion();
-  finishQuiz()
-  onceMore()
+  finishQuiz();
+  onceMore();
 }
 
 $(main);
@@ -252,13 +253,13 @@ function renderIt(state) {
 // /********** EVENT HANDLER FUNCTIONS **********/
 
 // // These functions handle events (submit, click, etc)
-function startQuiz() {
-  console.log("start quiz ran");
+/*function startQuiz() {
+  console.log("start quiz ran 1");
   $("body").on("click", ".start-button", function (evt) {
     evt.preventDefault()
     nextQuestion();
   });
-}
+}*/
 function checkAnswer() {
   console.log("check answer function ran ");
   $("body").on("click", `.submit-question`, function (event) {
@@ -278,27 +279,26 @@ function nextQuestion() {
   });
 }
 function startQuiz() {
-  console.log("start quiz ran");
+  console.log("start quiz ran 2");
   $("body").on("click", "#start", function (evt) {
     nextQuestion();
   });
 }
-function finishQuiz(){
-  console.log("finish quiz ran")
-  $("body").on('click','.finish-quiz',function(evt){
-    evt.preventDefault()
-    conclusionGenerator()
-  })
+function finishQuiz() {
+  console.log("finish quiz ran");
+  $("body").on("click", ".finish-quiz", function (evt) {
+    evt.preventDefault();
+    conclusionGenerator();
+  });
 }
-function onceMore(){
-  console.log("once more ran")
-  $("body").on('click','.again-button',function(evt){
-    
-    store.questions.score=0
-    store.questions.questionNumber=0
-    location.reload()
-    welcomeScreenGenerator()
-  })
+function onceMore() {
+  console.log("once more ran");
+  $("body").on("click", ".again-button", function (evt) {
+    store.questions.score = 0;
+    store.questions.questionNumber = 0;
+    location.reload();
+    welcomeScreenGenerator();
+  });
 }
 // $(/*listen to welcome screen)*/.on('click', '.start-button', function(){
 //   //render the first question screen

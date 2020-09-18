@@ -12,7 +12,7 @@ const store = {
       answers: ["1599", "1702", "1616", "1542"],
       correctAnswer: "1616",
       funFact:
-        "Not much is known about Shakespeare's death, but one theory holds that he died of a fever contracted after a drinking binge with a couple fellow playwrights",
+        "Not much is known about Shakespeare's death, but one theory holds that he died of a fever contracted after a drinking binge with a couple of fellow playwrights",
     },
     {
       question:
@@ -57,7 +57,8 @@ const store = {
         "Sir Henry Irving was perhaps the most famous actor of the Victorian Era. He was the first actor ever to be knighted, receiving the honor in 1895.",
     },
     {
-      question: "Apart from the ones written into his plays, how many sonnets is Shakespeare thought to have written? ",
+      question:
+        "Apart from the ones written into his plays, how many sonnets is Shakespeare thought to have written? ",
       answers: ["154", "207", "120", "309"],
       correctAnswer: "154",
       funFact:
@@ -69,41 +70,21 @@ const store = {
   score: 0,
 };
 
-/**
- *
- * Technical requirements:
- *
- * Your app should include a render() function, that regenerates the view each time the store is updated.
- * See your course material, consult your instructor, and reference the slides for more details.
- *
- * NO additional HTML elements should be added to the index.html file.
- *
- * You may add attributes (classes, ids, etc) to the existing HTML elements, or link stylesheets or additional scripts if necessary
- *
- * SEE BELOW FOR THE CATEGORIES OF THE TYPES OF FUNCTIONS YOU WILL BE CREATING 👇
- *
- */
-
 /********** TEMPLATE GENERATION FUNCTIONS **********/
 
-// These functions return HTML templates
+// These functions return HTML templates, and data needed for them
 
+//gets question
 function getQuestion() {
-  //this function takes the store and gives the question value for adding to the template
   let num = store.questionNumber;
   let nextQuestion = store.questions[num];
-  console.log(nextQuestion);
   return nextQuestion;
 }
 
+//generates question page
 function questionTemplateGenerator() {
   let questionNum = store.questionNumber;
-
-  console.log("`templateGenerator` fn ran");
   let question = getQuestion();
-  console.log("q# is: ", questionNum);
-  //takes in array/object
-  //generates container for question, along with appropriate buttons
   const template = `<section class="boxit" id="question-screen">
       <form class="container">
       <h2> SHAKESPEARE QUIZ</H2>
@@ -152,30 +133,28 @@ function questionTemplateGenerator() {
             <div><p> Question ${questionNum + 1} of ${
     store.questions.length
   }</p></div>
-            <div><p> ${store.score} of ${questionNum} Correct so far!</p></div>
+            <div><p> ${
+              store.score
+            } of ${questionNum} Correct so far!</p></div>
         </div>
       </form>
-      
     </section>`;
   renderIt(template);
 }
 
+//generates answer screen based on user input 
+//updates user score and question number 
 function answerTemplateGenerator() {
-  console.log("answer generator ran");
   let score = store.score;
   let totalQuestions = store.questions.length;
   let num = store.questionNumber;
   let funFact = store.questions[num].funFact;
   let userAnswer = $('input[name="quizquestion"]:checked').val();
   let correctAnswer = getQuestion().correctAnswer;
-  console.log("user ans is: ", userAnswer);
   let template;
   if (correctAnswer === userAnswer) {
     store.score += 1;
     store.questionNumber += 1;
-    //generates container for answer screen
-    // takes in a true or false
-    // if statment that checks if the answer is right or wrong and switches the template based on it
     template = `<section class="boxit" id="answer-screen">
         <h2>Correct!</h2>
         <p>The Correct Answer Was: ${correctAnswer}</p>
@@ -190,9 +169,7 @@ function answerTemplateGenerator() {
     template = `<section class="boxit" id="answer-screen">
         <h2> Incorrect!</h2>
         <p>The Correct Answer Was: ${correctAnswer}</p>
-        <p>You got ${
-          score
-        } of ${totalQuestions} correct so far.</p>
+        <p>You got ${score} of ${totalQuestions} correct so far.</p>
         <p>Did you Know?</p>
         <p class='text-left'> ${funFact}</p>
     `;
@@ -206,10 +183,9 @@ function answerTemplateGenerator() {
   }
   renderIt(template);
 }
+
+//generates welcome screen
 function welcomeScreenGenerator() {
-  console.log("welcomescreen generator fn ran");
-  //no inputs
-  //when site is loaded, generates "Welcome" and a start quiz button
   const template = `<section class="boxit" id="welcome-screen">
       <h1>Shakespeare Quiz</h1>
       <button class='next-question' id="start">Click Here to start Quiz</button>
@@ -217,10 +193,8 @@ function welcomeScreenGenerator() {
   renderIt(template);
 }
 
+//generates conclusion screen based on user results
 function conclusionGenerator() {
-  console.log("conclusion generator fn ran");
-  //take in questions object
-  //output window with final score, button to retake quiz
   let score = store.score;
   let totalQuestions = store.questions.length;
   const template = `<section class="boxit" id="answer-screen">
@@ -228,11 +202,11 @@ function conclusionGenerator() {
         <p>You got ${score} of ${totalQuestions} correct</p>
         <p> Click the button below to try again.</p>
         <button class="again-button"> Once More unto the Breach!</button>
-
     </section>`;
   renderIt(template);
 }
 
+//main function 
 function main() {
   renderIt();
   welcomeScreenGenerator();
@@ -249,53 +223,43 @@ $(main);
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the data store
 function renderIt(state) {
-  console.log("renderIt function ran");
-  //replaces content with appropriate next screen
   $("body").html(`${state}`);
 }
 // /********** EVENT HANDLER FUNCTIONS **********/
 
-// // These functions handle events (submit, click, etc)
-/*function startQuiz() {
-  console.log("start quiz ran 1");
-  $("body").on("click", ".start-button", function (evt) {
-    evt.preventDefault()
-    nextQuestion();
-  });
-}*/
+//listens for submission of answer, and calls answer generator
 function checkAnswer() {
-  console.log("check answer function ran ");
   $("body").on("click", `.submit-question`, function (event) {
     event.preventDefault();
     answerTemplateGenerator();
   });
 }
-//   //on submit of answer, takes in users choice
-//   //also takes questions object
-//   //checks against correctAnswer in questions and returns true/false
-// }
+
+//listens for "next question" button push, and calls question screen generator
 function nextQuestion() {
-  console.log("next q ran");
   $("body").on("click", ".next-question", function (evt) {
     evt.preventDefault();
     questionTemplateGenerator();
   });
 }
+
+//listens for user to click start quiz, and 
 function startQuiz() {
-  console.log("start quiz ran 2");
   $("body").on("click", "#start", function (evt) {
     nextQuestion();
   });
 }
+
+//
 function finishQuiz() {
-  console.log("finish quiz ran");
   $("body").on("click", ".finish-quiz", function (evt) {
     evt.preventDefault();
     conclusionGenerator();
   });
 }
+
+//
 function onceMore() {
-  console.log("once more ran");
   $("body").on("click", ".again-button", function (evt) {
     store.questions.score = 0;
     store.questions.questionNumber = 0;
@@ -303,20 +267,3 @@ function onceMore() {
     welcomeScreenGenerator();
   });
 }
-// $(/*listen to welcome screen)*/.on('click', '.start-button', function(){
-//   //render the first question screen
-// })
-
-// $(/*listen to question screen)*/.on('click', '.answer-button', function(){
-//   //check if answer correct
-//   //give appropriate response screen
-// })
-
-// $(/*listen to answer screen*/.on('click', '.next-button', function(){
-//   //render the next question with updated stats
-// })
-
-// $(/*listen to final screen*/).on('click','try-again-button', function(){
-//   //reset stats
-//   //render the welcome screen
-// })

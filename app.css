@@ -88,6 +88,11 @@ button{
   font-weight: 700 ;
 }
 
+.next-question, .again-button{
+  width: 50%;
+ align-self: center;; 
+}
+
 ul, p{
   font-family:'Grenze Gotisch', cursive;
   font-weight: 200;

@@ -188,7 +188,7 @@ function answerTemplateGenerator() {
 function welcomeScreenGenerator() {
   const template = `<section class="boxit" id="welcome-screen">
       <h1>Shakespeare Quiz</h1>
-      <button class='next-question' id="start">Click Here to start Quiz</button>
+      <button class='next-question' id="start">Click Here to Start!</button>
     </section>`;
   renderIt(template);
 }
